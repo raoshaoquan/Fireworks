@@ -1,0 +1,6 @@
+rootProject.name = 'Fireworks'
+
+include 'RecordServer'
+include 'GatewayServer'
+include 'SceneServer'
+
