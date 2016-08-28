@@ -11,7 +11,5 @@ repositories {
 }
 
 dependencies {
-    // ÒÀÀµ Common Ä£¿é
-    compile project(":Common")
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
