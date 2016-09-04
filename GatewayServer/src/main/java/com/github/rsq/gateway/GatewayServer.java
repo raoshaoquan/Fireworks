@@ -21,14 +21,18 @@ public class GatewayServer {
 
     public static void main(String[] args) throws Exception {
 
+        int threadNum = Runtime.getRuntime().availableProcessors() * 2;
         // Configure the server.
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
+        EventLoopGroup workerGroup = new NioEventLoopGroup(threadNum);
         try {
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
                     .option(ChannelOption.SO_BACKLOG, 100)
+                    .option(ChannelOption.SO_KEEPALIVE, false)
+                    //.option(ChannelOption.SO_RCVBUF, 128*1024)
+                    //.option(ChannelOption.SO_SNDBUF, 128*1024)
                     .handler(new LoggingHandler(LogLevel.INFO))
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override

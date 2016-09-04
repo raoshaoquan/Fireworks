@@ -4,6 +4,8 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 
+import java.nio.ByteOrder;
+
 /**
  * Created by raoshaoquan on 16/6/2.
  */
@@ -16,7 +18,7 @@ public class MessageDecoder extends LengthFieldBasedFrameDecoder {
 
     public MessageDecoder(int maxFrameLength, int lengthFieldOffset,
                    int lengthFieldLength) {
-        super(maxFrameLength, lengthFieldOffset, lengthFieldLength);
+        super(ByteOrder.LITTLE_ENDIAN, maxFrameLength, lengthFieldOffset, lengthFieldLength, 0, 0, true);
     }
 
     @Override

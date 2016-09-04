@@ -2,6 +2,7 @@ package com.github.rsq.gateway.handler;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -53,7 +54,10 @@ public class FiexLengthServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         // Close the connection when an exception is raised.
-        cause.printStackTrace();
+        // cause.printStackTrace();
+        Channel incoming = ctx.channel();
+        System.out.println("Socket " + incoming.remoteAddress()
+                + " 异常 : " + cause.getMessage());
         ctx.close();
     }
 }
